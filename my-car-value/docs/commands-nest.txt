@@ -1,0 +1,8 @@
+## Create module
+nest g module <name>
+
+## Create controller
+nest g controller <name>
+
+## Create service
+nest g service <name>
