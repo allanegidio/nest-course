@@ -1,7 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateUserDTO } from './dtos/create-user.dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -29,7 +28,7 @@ export class UsersService {
     const user = await this.repository.findOne(id)
     
     if(!user)
-      throw new Error('user not found')
+      throw new NotFoundException('user not found')
 
     Object.assign(user, props)
 
@@ -40,7 +39,7 @@ export class UsersService {
     const user = await this.repository.findOne(id)
 
     if(!user)
-      throw new Error('user not found')
+      throw new NotFoundException('user not found')
     
     return this.repository.remove(user)
   }
