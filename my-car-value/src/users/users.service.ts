@@ -20,15 +20,17 @@ export class UsersService {
     return this.repository.find({ email })
   }
 
-  findOne(id: number) {
-    return this.repository.findOne(id)
-  }
-
-  async update(id: number, props: Partial<User>) {
+  async findOne(id: number) {
     const user = await this.repository.findOne(id)
     
     if(!user)
       throw new NotFoundException('user not found')
+
+    return user
+  }
+
+  async update(id: number, props: Partial<User>) {
+    const user = await this.findOne(id)
 
     Object.assign(user, props)
 
@@ -36,10 +38,7 @@ export class UsersService {
   }
 
   async remove(id: number) {
-    const user = await this.repository.findOne(id)
-
-    if(!user)
-      throw new NotFoundException('user not found')
+    const user = await this.findOne(id)
     
     return this.repository.remove(user)
   }
