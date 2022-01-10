@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseIntercepto
 import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 import { CreateUserDTO } from './dtos/create-user.dto';
 import { UpdateUserDTO } from './dtos/update-user.dto';
+import { UserDTO } from './dtos/user.dto';
 import { UsersService } from './users.service';
 
 @Controller('auth')
@@ -16,7 +17,7 @@ export class UsersController {
   }
 
   @Get('/:id')
-  @UseInterceptors(SerializeInterceptor)
+  @UseInterceptors(new SerializeInterceptor(UserDTO))
   findUser(@Param('id') id: number) {
     return this.service.findOne(id)
   }
