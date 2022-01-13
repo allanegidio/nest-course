@@ -3,30 +3,30 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "alla11111=11n@teste.com.br",
+  "email": "111@teste.com.br",
   "password": "testepassword"
 }
-
-###  Get all Users
-GET http://localhost:3000/auth/whoami
-
-###  Sign out
-POST http://localhost:3000/auth/signout
 
 ### Sign-in User
 POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-  "email": "alla111111n@teste.com.br",
+  "email": "111@teste.com.br",
   "password": "testepassword"
 }
+
+### Get current user
+GET http://localhost:3000/auth/currentUser
+
+###  Sign out
+POST http://localhost:3000/auth/signout
 
 ###  Get all Users
 GET http://localhost:3000/auth?email=test@teste.com.br
 
 ###  Get User by Id
-GET http://localhost:3000/auth/1
+GET http://localhost:3000/auth/11
 
 ### Delete User By Id
 DELETE http://localhost:3000/auth/6
