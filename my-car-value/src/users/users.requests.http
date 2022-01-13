@@ -3,7 +3,22 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "test@teste.com.br",
+  "email": "alla11111=11n@teste.com.br",
+  "password": "testepassword"
+}
+
+###  Get all Users
+GET http://localhost:3000/auth/whoami
+
+###  Sign out
+POST http://localhost:3000/auth/signout
+
+### Sign-in User
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+  "email": "alla111111n@teste.com.br",
   "password": "testepassword"
 }
 
