@@ -32,7 +32,7 @@ export class AuthService {
     const [user] = await this.usersService.find(email)
 
     if (!user) 
-      throw new NotFoundException('USer not found')
+      throw new NotFoundException('User not found')
 
     const [salt, storedHash] = user.password.split('.')
 

@@ -1,16 +1,32 @@
+import { BadRequestException, NotFoundException } from "@nestjs/common"
 import { Test } from "@nestjs/testing"
+import { randomBytes, scrypt as _scrypt } from "crypto";
+import { promisify } from "util"
+import { User } from "../user.entity"
 import { AuthService } from "./auth.service"
 import { UsersService } from "./users.service"
 
-describe('Unit Test - Auth Service', () => {
+const scrypt = promisify(_scrypt)
+
+describe('Unit Test - AuthService', () => {
   let authService: AuthService
 
-  const fakeUsersService = {
-    find: () => Promise.resolve([]),
-    create: (email: string, password: string) => Promise.resolve({ id: 1, email, password })
+  const users: User[] = []
+
+  const fakeUsersService: Partial<UsersService> = {
+    find: (email: string) => {
+      const filteredUsers = users.filter(user => user.email === email)
+      return Promise.resolve(filteredUsers)
+    },
+    create: (email: string, password: string) => {
+      const user = { id: Math.floor(Math.random() * 999999), email, password } as User
+      users.push(user)
+
+      return Promise.resolve(user)
+    }
   }
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [
         AuthService,
@@ -26,4 +42,40 @@ describe('Unit Test - Auth Service', () => {
   it('Shoul be defined Auth Service', async () => {
     expect(authService).toBeDefined()
   })
+
+  it('should create a new user with a salted and hashed password', async () => {
+    const user = await authService.signup('allan.egidio@outlook.com', 'asdf')
+    const [salt, hash] = user.password.split('.')
+
+    expect(user.password).not.toEqual('asdf')
+    expect(salt).toBeDefined()
+    expect(hash).toBeDefined()
+  })
+
+  it('throws an error if user signs up with email that is in use', async () => {
+    await authService.signup('allan.egidio@outlook.com', 'Contract me!')
+
+    expect(authService.signup('allan.egidio@outlook.com', 'Contract me!')).rejects.toBeInstanceOf(BadRequestException);
+  })
+
+  it('throws if user not found when try sign-in', () => {
+    expect(authService.signin('allan.egidio@outlook.com', 'Contract me!')).rejects.toBeInstanceOf(NotFoundException);
+  });
+  
+  it('throws if user not found when try sign-in', () => {
+    expect(authService.signin('allan.egidio@outlook.com', 'Contract me!')).rejects.toBeInstanceOf(NotFoundException);
+  });
+
+  it('throws if an invalid password is provided', async () => {
+    await authService.signup('allan.egidio@outlook.com', 'Contract me!')
+    expect(authService.signin('allan.egidio@outlook.com', 'Wrong password')).rejects.toBeInstanceOf(BadRequestException);
+  });
+
+  it('Should return user when try sign in', async () => {
+    await authService.signup('allan.egidio@outlook.com',  'Contract me!')
+    
+    const result = await authService.signin('allan.egidio@outlook.com',  'Contract me!')
+
+    expect(result).toBeDefined()
+  });
 })
