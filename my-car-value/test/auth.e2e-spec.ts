@@ -21,7 +21,7 @@ describe('Authentication Test - (e2e)', () => {
 
   it('should handles a singup request',  async () => {
     const response = await request.post('/auth/signup')
-                            .send({ email: 'allan.egidio4@outlook.com', password: 'Contract me!' })
+                            .send({ email: 'allan.egidio@outlook.com', password: 'Contract me!' })
 
     const { id, email } = response.body
     

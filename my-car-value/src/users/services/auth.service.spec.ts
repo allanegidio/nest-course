@@ -61,10 +61,6 @@ describe('Unit Test - AuthService', () => {
   it('throws if user not found when try sign-in', () => {
     expect(authService.signin('allan.egidio@outlook.com', 'Contract me!')).rejects.toBeInstanceOf(NotFoundException);
   });
-  
-  it('throws if user not found when try sign-in', () => {
-    expect(authService.signin('allan.egidio@outlook.com', 'Contract me!')).rejects.toBeInstanceOf(NotFoundException);
-  });
 
   it('throws if an invalid password is provided', async () => {
     await authService.signup('allan.egidio@outlook.com', 'Contract me!')
