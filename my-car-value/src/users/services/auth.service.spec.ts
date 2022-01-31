@@ -52,10 +52,18 @@ describe('Unit Test - AuthService', () => {
     expect(hash).toBeDefined()
   })
 
-  it('throws an error if user signs up with email that is in use', async () => {
-    await authService.signup('allan.egidio@outlook.com', 'Contract me!')
+  it('Should return user when try sign in', async () => {
+    await authService.signup('test_return@outlook.com',  'Contract me!')
+    
+    const result = await authService.signin('test_return@outlook.com',  'Contract me!')
 
-    expect(authService.signup('allan.egidio@outlook.com', 'Contract me!')).rejects.toBeInstanceOf(BadRequestException);
+    expect(result).toBeDefined()
+  });
+
+  it('throws an error if user signs up with email that is in use', async () => {
+    await authService.signup('already_exists@outlook.com', 'Contract me!')
+
+    expect(authService.signup('already_exists@outlook.com', 'Contract me!')).rejects.toBeInstanceOf(BadRequestException);
   })
 
   it('throws if user not found when try sign-in', () => {
@@ -63,15 +71,8 @@ describe('Unit Test - AuthService', () => {
   });
 
   it('throws if an invalid password is provided', async () => {
-    await authService.signup('allan.egidio@outlook.com', 'Contract me!')
-    expect(authService.signin('allan.egidio@outlook.com', 'Wrong password')).rejects.toBeInstanceOf(BadRequestException);
-  });
+    await authService.signup('wrong_password@outlook.com', 'Contract me!')
 
-  it('Should return user when try sign in', async () => {
-    await authService.signup('allan.egidio@outlook.com',  'Contract me!')
-    
-    const result = await authService.signin('allan.egidio@outlook.com',  'Contract me!')
-
-    expect(result).toBeDefined()
+    expect(authService.signin('wrong_password@outlook.com', 'Wrong password')).rejects.toBeInstanceOf(BadRequestException);
   });
 })
