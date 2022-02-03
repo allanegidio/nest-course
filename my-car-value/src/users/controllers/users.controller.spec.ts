@@ -1,9 +1,9 @@
 import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
-import { CreateUserDTO } from './dtos/create-user.dto';
-import { AuthService } from './services/auth.service';
-import { UsersService } from './services/users.service';
-import { User } from './user.entity';
+import { CreateUserDTO } from '../dtos/create-user.dto';
+import { AuthService } from '../services/auth.service';
+import { UsersService } from '../services/users.service';
+import { User } from '../entities/user.entity';
 import { UsersController } from './users.controller';
 
 describe('Unit Test - UsersController', () => {

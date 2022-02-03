@@ -2,7 +2,7 @@ import { BadRequestException, NotFoundException } from "@nestjs/common"
 import { Test } from "@nestjs/testing"
 import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util"
-import { User } from "../user.entity"
+import { User } from "../entities/user.entity"
 import { AuthService } from "./auth.service"
 import { UsersService } from "./users.service"
 

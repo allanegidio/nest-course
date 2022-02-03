@@ -1,10 +1,16 @@
 import { CanActivate, ExecutionContext } from "@nestjs/common";
 import { Observable } from "rxjs";
 
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     const request = context.switchToHttp().getRequest()
 
-    return request.session.userId
-  } 
+    if (!request.currentUser)
+      return false
+
+    if (request.currentUser.admin)
+      return true
+    else
+      return false
+  }
 }

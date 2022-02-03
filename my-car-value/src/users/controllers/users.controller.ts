@@ -1,13 +1,14 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query, Session, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '../guards/auth.guard';
-import { Serialize } from '../interceptors/serialize.interceptor';
-import { CurrentUser } from './decorators/current-user.decorator';
-import { CreateUserDTO } from './dtos/create-user.dto';
-import { UpdateUserDTO } from './dtos/update-user.dto';
-import { UserDTO } from './dtos/user.dto';
-import { AuthService } from './services/auth.service';
-import { UsersService } from './services/users.service';
-import { User } from './user.entity';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { CreateUserDTO } from '../dtos/create-user.dto';
+import { UpdateUserDTO } from '../dtos/update-user.dto';
+import { UserDTO } from '../dtos/user.dto';
+import { User } from '../entities/user.entity';
+import { AuthService } from '../services/auth.service';
+import { UsersService } from '../services/users.service';
+
 
 @Controller('auth')
 @Serialize(UserDTO)
