@@ -1,4 +1,4 @@
-import { Report } from "src/reports/entities/report.entity"
+import { Report } from "../../reports/entities/report.entity"
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
