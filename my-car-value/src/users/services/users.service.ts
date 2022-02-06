@@ -10,8 +10,8 @@ export class UsersService {
     private readonly repository: Repository<User>
   ) { }
 
-  create(email: string, password: string) {
-    const user = this.repository.create({ email, password })
+  create(email: string, password: string, admin: boolean) {
+    const user = this.repository.create({ email, password, admin })
     
     return this.repository.save(user)
   }

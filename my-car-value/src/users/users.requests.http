@@ -3,8 +3,9 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "email": "222222222@teste.com.br",
-  "password": "testepassword"
+  "email": "admin@teste.com.br",
+  "password": "admin",
+  "admin": true
 }
 
 ### Sign-in User
@@ -12,8 +13,8 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-  "email": "2222222@teste.com.br",
-  "password": "testepassword"
+  "email": "admin@teste.com.br",
+  "password": "admin"
 }
 
 ### Get current user

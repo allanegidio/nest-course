@@ -3,6 +3,7 @@ import { AuthGuard } from '../../guards/auth.guard';
 import { Serialize } from '../../interceptors/serialize.interceptor';
 import { CurrentUser } from '../decorators/current-user.decorator';
 import { CreateUserDTO } from '../dtos/create-user.dto';
+import { SignInUser } from '../dtos/sign-in-user.dto';
 import { UpdateUserDTO } from '../dtos/update-user.dto';
 import { UserDTO } from '../dtos/user.dto';
 import { User } from '../entities/user.entity';
@@ -41,7 +42,7 @@ export class UsersController {
 
   @Post('/signup')
   async createUser(@Body() body: CreateUserDTO, @Session() session: any) {
-    const user = await this.authService.signup(body.email, body.password)
+    const user = await this.authService.signup(body.email, body.password, body.admin)
 
     session.userId = user.id
     
@@ -49,7 +50,7 @@ export class UsersController {
   }
 
   @Post('/signin')
-  async signin(@Body() body: CreateUserDTO, @Session() session: any) {
+  async signin(@Body() body: SignInUser, @Session() session: any) {
     const user = await this.authService.signin(body.email, body.password)
 
     session.userId = user.id
@@ -66,5 +67,4 @@ export class UsersController {
   updateUser(@Param('id') id: number, @Body() user: UpdateUserDTO) {
     return this.usersService.update(id, user)
   }
-  
 }

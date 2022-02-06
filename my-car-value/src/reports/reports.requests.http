@@ -22,9 +22,9 @@ Content-Type: application/json
   "price": 50000
 }
 
-@reportId = {{ createReport.response.body.id }}
-
 ### Approve a report
+
+@reportId = {{ createReport.response.body.id }}
 
 # @name approveReport
 PATCH {{host}}/reports/{{reportId}}
@@ -66,145 +66,145 @@ GET {{host}}/reports?make=toyota&model=corolla&lng=0&lat=0&mileage=20000&year=19
 
 
 
-### Create Rule
+# ### Create Rule
 
-@categoryId = {{ createCategory.response.body.id }}
+# @categoryId = {{ createCategory.response.body.id }}
 
-# @name createRule
-POST {{host}}/rule
-Content-Type: application/json
+# # @name createRule
+# POST {{host}}/rule
+# Content-Type: application/json
 
-{
-  "category_id": "{{categoryId}}",
-  "rule": "Regra {{randomId}} (REST Client)",
-  "type": "TEXT",
-  "comparator": "EQ",
-  "unit": "Unidade",
-  "fixed": true
-}
+# {
+#   "category_id": "{{categoryId}}",
+#   "rule": "Regra {{randomId}} (REST Client)",
+#   "type": "TEXT",
+#   "comparator": "EQ",
+#   "unit": "Unidade",
+#   "fixed": true
+# }
 
-### Create Unit
+# ### Create Unit
 
-# @name createUnit
-POST {{host}}/branch
-Content-Type: application/json
+# # @name createUnit
+# POST {{host}}/branch
+# Content-Type: application/json
 
-{
-  "name": "Unidade {{randomId}}",
-  "companyCode": "64755404000178",
-  "phone": "11365478965",
-  "email": "unidade{{randomId}}@teste.com.br",
-  "address": {
-    "cep": "45220970",
-    "name": "{{randomId}} Elmira Port",
-    "number": "15",
-    "block_building": "Apartamento",
-    "complement": "Complemento",
-    "city": "Osasco",
-    "state": "SP",
-    "neighborhood": "Neighborhood"
-  },
-  "workHours": {
-    "start": "14:00",
-    "end": "21:00",
-    "holiday": {
-      "start": "08:00",
-      "end": "17:00"
-    },
-    "different": {
-      "start": "08:00",
-      "end": "17:00"
-    },
-    "weekdays": {
-      "monday": true,
-      "tuesday": false,
-      "wednesday": true,
-      "thursday": false,
-      "friday": true,
-      "is_24h": false
-    },
-    "weekends": {
-      "saturday": true,
-      "sunday": false,
-      "is_24h": false
-    }
-  },
-  "locations": [
-    {
-      "name": "Localidade {{randomId}}",
-      "description": "Descricao {{randomId}}"
-    }
-  ],
-  "img_url": "https://i.pinimg.com/280x280_RS/cb/b2/80/cbb280fa8c687cf3b137df878bf82d08.jpg",
-  "id_sgh": "{{randomId}}",
-  "cnes": 0
-}
+# {
+#   "name": "Unidade {{randomId}}",
+#   "companyCode": "64755404000178",
+#   "phone": "11365478965",
+#   "email": "unidade{{randomId}}@teste.com.br",
+#   "address": {
+#     "cep": "45220970",
+#     "name": "{{randomId}} Elmira Port",
+#     "number": "15",
+#     "block_building": "Apartamento",
+#     "complement": "Complemento",
+#     "city": "Osasco",
+#     "state": "SP",
+#     "neighborhood": "Neighborhood"
+#   },
+#   "workHours": {
+#     "start": "14:00",
+#     "end": "21:00",
+#     "holiday": {
+#       "start": "08:00",
+#       "end": "17:00"
+#     },
+#     "different": {
+#       "start": "08:00",
+#       "end": "17:00"
+#     },
+#     "weekdays": {
+#       "monday": true,
+#       "tuesday": false,
+#       "wednesday": true,
+#       "thursday": false,
+#       "friday": true,
+#       "is_24h": false
+#     },
+#     "weekends": {
+#       "saturday": true,
+#       "sunday": false,
+#       "is_24h": false
+#     }
+#   },
+#   "locations": [
+#     {
+#       "name": "Localidade {{randomId}}",
+#       "description": "Descricao {{randomId}}"
+#     }
+#   ],
+#   "img_url": "https://i.pinimg.com/280x280_RS/cb/b2/80/cbb280fa8c687cf3b137df878bf82d08.jpg",
+#   "id_sgh": "{{randomId}}",
+#   "cnes": 0
+# }
 
-### Create Product
+# ### Create Product
 
-# @name createProduct
-POST {{host}}/products
-Content-Type: application/json
+# # @name createProduct
+# POST {{host}}/products
+# Content-Type: application/json
 
-{
-  "name": "Produto Teste {{randomId}} (REST Client)",
-  "price": 5000,
-  "recurrence_type": "Recorrente",
-  "contract_type": "Contrato",
-  "discount": 0,
-  "description": "Um producto para Teste"
-}
+# {
+#   "name": "Produto Teste {{randomId}} (REST Client)",
+#   "price": 5000,
+#   "recurrence_type": "Recorrente",
+#   "contract_type": "Contrato",
+#   "discount": 0,
+#   "description": "Um producto para Teste"
+# }
 
-### Link Product to Rule
+# ### Link Product to Rule
 
-@productId = {{ createProduct.response.body.id }}
-@ruleId = {{ createRule.response.body.id }}
+# @productId = {{ createProduct.response.body.id }}
+# @ruleId = {{ createRule.response.body.id }}
 
-# @name linkProductToRule
-POST {{host}}/product-rule/{{productId}}
-Content-Type: application/json
+# # @name linkProductToRule
+# POST {{host}}/product-rule/{{productId}}
+# Content-Type: application/json
 
-{
-  "rulesToLink": [
-    {"ruleId": "{{ruleId}}", "value": "TESTE {{randomId}}"}
-  ]
-}
+# {
+#   "rulesToLink": [
+#     {"ruleId": "{{ruleId}}", "value": "TESTE {{randomId}}"}
+#   ]
+# }
 
-### Create Product Coverage
+# ### Create Product Coverage
 
-@productId = {{ createProduct.response.body.id }}
-@ruleId = {{ createRule.response.body.id }}
-@unitId = {{ createUnit.response.body.id }}
+# @productId = {{ createProduct.response.body.id }}
+# @ruleId = {{ createRule.response.body.id }}
+# @unitId = {{ createUnit.response.body.id }}
 
-# @name createProductCoverage
-POST {{host}}/product-items
-Content-Type: application/json
+# # @name createProductCoverage
+# POST {{host}}/product-items
+# Content-Type: application/json
 
-{
-  "product_id": "{{productId}}",
-  "item_SGH_id": "string",
-  "quantity": 500,
-  "care_type": "PRESENTIAL",
-  "allow_rescheduling": true,
-  "return_item": true,
-  "allow_cancellation": true,
-  "first_appointment": true,
-  "is_kit": true,
-  "rules": [
-    { "ruleId": "{{ruleId}}" }
-  ],
-  "units": [
-    "{{unitId}}"
-  ],
-  "item_alias": "ALIAS",
-  "category_link": "EXAM"
-}
+# {
+#   "product_id": "{{productId}}",
+#   "item_SGH_id": "string",
+#   "quantity": 500,
+#   "care_type": "PRESENTIAL",
+#   "allow_rescheduling": true,
+#   "return_item": true,
+#   "allow_cancellation": true,
+#   "first_appointment": true,
+#   "is_kit": true,
+#   "rules": [
+#     { "ruleId": "{{ruleId}}" }
+#   ],
+#   "units": [
+#     "{{unitId}}"
+#   ],
+#   "item_alias": "ALIAS",
+#   "category_link": "EXAM"
+# }
 
-### Get All Products
-GET {{host}}/products
+# ### Get All Products
+# GET {{host}}/products
 
-### Get All Rules
-GET {{host}}/rule
+# ### Get All Rules
+# GET {{host}}/rule
 
-### Get SGH by Id
-GET {{host}}/items?search=ab3
+# ### Get SGH by Id
+# GET {{host}}/items?search=ab3
