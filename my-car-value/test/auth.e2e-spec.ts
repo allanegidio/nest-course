@@ -22,7 +22,7 @@ describe('Authentication Test - (e2e)', () => {
 
   it('should handles a singup request',  async () => {
     const response = await request.post('/auth/signup')
-                            .send({ email: `allan.egidio.${Math.floor(Math.random() * 99999)}@outlook.com`, password: 'Contract me!' })
+                            .send({ email: `allan.egidio.${Math.floor(Math.random() * 99999)}@outlook.com`, password: 'Contract me!', admin: true })
 
     const { id, email } = response.body
     
@@ -33,7 +33,7 @@ describe('Authentication Test - (e2e)', () => {
 
   it('signup as a new user then get the currently logged in user',  async () => {
     const response = await request.post('/auth/signup')
-                            .send({ email: `allan.egidio.${Math.floor(Math.random() * 99999)}@outlook.com`, password: 'Contract me!' })
+                            .send({ email: `allan.egidio.${Math.floor(Math.random() * 99999)}@outlook.com`, password: 'Contract me!', admin: true })
 
     const cookie = response.get('Set-Cookie')
 
