@@ -19,7 +19,7 @@ export class ReportsController {
   @Get()
   getEstimate(@Query() query: GetEstimateDTO)
   {
-    console.log('bunda')
+    return this.reportsService.createEstimate(query)
   }
 
   @Post()

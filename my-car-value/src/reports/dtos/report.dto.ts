@@ -8,6 +8,9 @@ export class ReportDTO {
   price: number
 
   @Expose()
+  make: string
+
+  @Expose()
   model: string
 
   @Expose()
