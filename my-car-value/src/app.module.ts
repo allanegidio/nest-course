@@ -19,6 +19,7 @@ const cookieSession = require('cookie-session');
     }),
     UsersModule,
     ReportsModule,
+    //TypeOrmModule.forRoot()
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => {
@@ -48,8 +49,12 @@ const cookieSession = require('cookie-session');
 })
 
 export class AppModule {
+  constructor(
+    private configService: ConfigService
+  ) {}
+
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(cookieSession({ keys: ['userId']}))
+    consumer.apply(cookieSession({ keys: [this.configService.get('COOKIE_KEY')]}))
             .forRoutes('*')
   }
 }
