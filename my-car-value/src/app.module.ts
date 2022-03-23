@@ -43,7 +43,11 @@ const cookieSession = require('cookie-session');
     AppService,
     {
       provide: APP_PIPE,
-      useValue: new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true })
+      useValue: new ValidationPipe({ 
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        //transform: true
+      })
     }
   ]
 })
